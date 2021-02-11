@@ -1,0 +1,22 @@
+{% extends "nba/index.html" %}
+{% block content %}
+    <div class="box">
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-50x50">
+
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <span class="title">{{ object.name }}</span>
+                        <br>
+                        <span class="subtitle">{{ object.current_team }}</span>
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+    <link id="mystylesheet" rel="stylesheet" type="text/css" href="{% static 'nba/light.css' %}" />
+</head>
+
+<body style="min-height: 100vh;">
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <button class="btn btn-light" onclick="swapStyle('{% static 'nba/light.css' %}')">Light Mode</button>
+            <button class="btn btn-dark" onclick="swapStyle('{% static 'nba/dark.css' %}')">Dark Mode</button>
+            <div class="container">
+                <h1 class="title">
+                    Get NBA player stats
+                </h1>
+            </div>
+        </div>
+    </section>
+    {% block content %} {% endblock content %}
+
+    <script type="text/javascript">
+
+        var setTheme = localStorage.getItem('theme')
+
+        if (setTheme == null) {
+            swapStyles('light.css')
+        } else {
+            swapStyle(setTheme)
+        }
+
+        function swapStyle(sheet) {
+            document.getElementById('mystylesheet').href = sheet
+            localStorage.setItem('theme', sheet)
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
