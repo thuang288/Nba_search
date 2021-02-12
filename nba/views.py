@@ -75,5 +75,5 @@ def delete(request, player_name):
 class PostDetailView(DetailView):
     model = Player
     template_name = 'nba/post_detail.html'
-    #queryset = Player.objects.all()
+    queryset = Player.objects.all()
     
