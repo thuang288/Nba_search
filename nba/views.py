@@ -66,14 +66,55 @@ def index(request):
         'message' : message,
         'message_class' : message_class
     }
-    return render(request, 'nba/base.html', context)
+    
+    return render(
+        request, 
+        'nba/base.html', 
+        context
+    )
 
 def delete(request, player_name):
     Player.objects.get(name=player_name).delete()
     return redirect('home')
 
-class PostDetailView(DetailView):
+
+def post_detail(request, pk):
+    player = Player.objects.get(pk = pk)
+
+    url = 'https://www.balldontlie.io/api/v1/players/?search={}'
+
+
+    r = requests.get(url.format(player.name)).json()
+    
+    id = r['data'][0]['id']
+    
+    player_avg = 'https://www.balldontlie.io/api/v1/season_averages?player_ids[]={}'
+    p = requests.get(player_avg.format(id)).json()
+    # print(r.text)
+    
+    player_detail = {
+        'name': player.name.capitalize(),
+        'pk': player.pk,
+        'season': p['data'][0]['season'],
+        'games_played': p['data'][0]['games_played'],
+        'points': p['data'][0]['pts'],
+        'post': r['data'][0]['position'],
+        'current_team':r['data'][0]['team']['full_name'],
+        'height': r['data'][0]['height_inches'],
+        'weight':r['data'][0]['weight_pounds'],
+    }
+
+    
+
+    return render (
+        request,
+        'nba/post_detail.html',
+        {'player': player_detail}
+    )
+
+''' 
+    class PostDetailView(DetailView):
     model = Player
     template_name = 'nba/post_detail.html'
     queryset = Player.objects.all()
-    
+'''   

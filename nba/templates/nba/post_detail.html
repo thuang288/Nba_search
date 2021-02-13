@@ -10,9 +10,17 @@
             <div class="media-content">
                 <div class="content">
                     <p>
-                        <span class="title">{{ object.name }}</span>
+                        <span class="title">{{ player.name }}</span>
                         <br>
-                        <span class="subtitle">{{ object.current_team }}</span>
+                        <span class="subtitle">Team: {{ player.current_team }}</span>
+                        <br>
+                        <span class="subtitle">Position: {{ player.post }}</span>
+                        <br>
+                        <span class="subtitle">Games Played: {{ player.games_played }}</span>
+                        <br>
+                        {% if 'season' in player %}
+                            <span class="subtitle">Points Per Game for {{ player.season }}: {{ player.points }}</span>
+                        {% endif %}
                         <br>
                     </p>
                 </div>
