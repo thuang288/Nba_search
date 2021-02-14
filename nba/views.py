@@ -82,30 +82,31 @@ def post_detail(request, pk):
     player = Player.objects.get(pk = pk)
 
     url = 'https://www.balldontlie.io/api/v1/players/?search={}'
-
-
     r = requests.get(url.format(player.name)).json()
-    
     id = r['data'][0]['id']
     
     player_avg = 'https://www.balldontlie.io/api/v1/season_averages?player_ids[]={}'
     p = requests.get(player_avg.format(id)).json()
-    # print(r.text)
     
     player_detail = {
-        'name': player.name.capitalize(),
+        'name': r['data'][0]['first_name'],
+        'last_name': r['data'][0]['last_name'],
         'pk': player.pk,
-        'season': p['data'][0]['season'],
-        'games_played': p['data'][0]['games_played'],
-        'points': p['data'][0]['pts'],
+        # 'season': p['data'][0].get('season'),
+        #'games_played': p['data'][0]['games_played'],
+        #'points': p['data'][0]['pts'],
         'post': r['data'][0]['position'],
         'current_team':r['data'][0]['team']['full_name'],
         'height': r['data'][0]['height_inches'],
         'weight':r['data'][0]['weight_pounds'],
     }
-
+    if not p['data']:
+        player_detail['season'] = ''
+        player_detail['points'] = ''
+    else:
+        player_detail['season'] = p['data'][0]['season']
+        player_detail['points'] = p['data'][0]['pts']
     
-
     return render (
         request,
         'nba/post_detail.html',
