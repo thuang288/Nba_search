@@ -12,15 +12,20 @@
                     <p>
                         <span class="title">{{ player.name }} {{ player.last_name }}</span>
                         <br>
+                        {% if player.height_ft is None and player.height_in is None %}
+                            <span class="subtitle">Height: Not in API</span>
+                            <br>
+                        {% else %}
+                            <span class="subtitle">Height: {{ player.height_ft }} ft {{ player.height_in }} in</span>
+                            <br>
+                        {% endif %}
                         <span class="subtitle">Team: {{ player.current_team }}</span>
                         <br>
                         <span class="subtitle">Position: {{ player.post }}</span>
                         <br>
-                        <span class="subtitle">Games Played: {{ player.games_played }}</span>
+                        <span class="subtitle">Games Played in {{ player.season }}: {{ player.games_played }}</span>
                         <br>
-                        {% if 'season' in player %}
-                            <span class="subtitle">Points Per Game for {{ player.season }}: {{ player.points }}</span>
-                        {% endif %}
+                        <span class="subtitle">Points Per Game for {{ player.season }}: {{ player.points }}</span>
                         <br>
                     </p>
                 </div>

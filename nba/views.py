@@ -10,8 +10,8 @@ def index(request):
     url = 'https://www.balldontlie.io/api/v1/players/?search={}'
 
     error = ''
-    message = ''
-    message_class = ''
+    # message = ''
+    # message_class = ''
 
     if request.method == 'POST':
         form = PlayerForm(request.POST)
@@ -31,12 +31,14 @@ def index(request):
                 error = 'Player is already in the database'
         return HttpResponseRedirect('/')
     
+    '''
         if error:
             message = error
             message_class = 'is-danger'
         else:
             message = 'Player added successfully'
             message_class = 'is-success'
+    '''
 
     form = PlayerForm()
 
@@ -51,10 +53,7 @@ def index(request):
         nba_players = {
             'name': player.name,
             'id': player.id,
-            'post': r['data'][0]['position'],
             'current_team':r['data'][0]['team']['full_name'],
-            'height': r['data'][0]['height_inches'],
-            'weight':r['data'][0]['weight_pounds'],
         }
 
         player_data.append(nba_players)
@@ -63,8 +62,8 @@ def index(request):
     context = {
         'player_data': player_data, 
         'form': form,
-        'message' : message,
-        'message_class' : message_class
+        # 'message' : message,
+        # 'message_class' : message_class
     }
     
     return render(
@@ -93,19 +92,23 @@ def post_detail(request, pk):
         'last_name': r['data'][0]['last_name'],
         'pk': player.pk,
         # 'season': p['data'][0].get('season'),
-        #'games_played': p['data'][0]['games_played'],
-        #'points': p['data'][0]['pts'],
+        # 'games_played': p['data'][0]['games_played'],
+        # 'points': p['data'][0]['pts'],
         'post': r['data'][0]['position'],
         'current_team':r['data'][0]['team']['full_name'],
-        'height': r['data'][0]['height_inches'],
+        'height_ft': r['data'][0]['height_feet'],
+        'height_in': r['data'][0]['height_inches'],
         'weight':r['data'][0]['weight_pounds'],
     }
+    
     if not p['data']:
         player_detail['season'] = ''
         player_detail['points'] = ''
+        player_detail['games_played'] = ''
     else:
         player_detail['season'] = p['data'][0]['season']
         player_detail['points'] = p['data'][0]['pts']
+        player_detail['games_played'] = p['data'][0]['games_played']
     
     return render (
         request,
