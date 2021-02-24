@@ -21,8 +21,13 @@
                         {% endif %}
                         <span class="subtitle">Team: {{ player.current_team }}</span>
                         <br>
-                        <span class="subtitle">Position: {{ player.post }}</span>
-                        <br>
+                        {% if not player.post %}
+                            <span class="subtitle">Position: Retired</span>
+                            <br>
+                        {% else %}
+                            <span class="subtitle">Position: {{ player.post }}</span>
+                            <br>
+                        {% endif %}
                         <span class="subtitle">Games Played in {{ player.season }}: {{ player.games_played }}</span>
                         <br>
                         <span class="subtitle">Points Per Game for {{ player.season }}: {{ player.points }}</span>
