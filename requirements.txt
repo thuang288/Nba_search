@@ -8,7 +8,6 @@ colorama==0.4.3
 comtypes==1.1.7
 contextlib2==0.6.0.post1
 coverage==5.3.1
-cryptography==2.8
 cycler==0.10.0
 Cython==0.29.15
 cytoolz==0.10.1
@@ -50,7 +49,6 @@ libarchive-c==2.8
 llvmlite==0.31.0
 locket==0.2.0
 lxml==4.6.2
-Pillow==7.0.0
 pkginfo==1.5.0.1
 pluggy==0.13.1
 ply==3.11
@@ -63,7 +61,6 @@ py==1.8.1
 pycodestyle==2.5.0
 pycosat==0.6.3
 pycparser==2.19
-pycrypto==2.6.1
 pycurl==7.43.0.5
 pydocstyle==4.0.1
 pyflakes==2.1.1
