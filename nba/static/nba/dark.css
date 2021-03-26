@@ -10,15 +10,16 @@ p, span, small{
 	color: #eaeaea;
 }
 
-#box{
-	width: 400px;
-	margin: 0 auto;
-	margin-top: 100px;
-	border: 2px solid rgb(24, 26, 31);
-	border-radius: 5px;
-	text-align: center;
-	padding: 20px;
+.box{
 	background-color: rgb(49, 54, 63) !important;
+}
+
+.subtitle{
+	color: white;
+}
+
+.title{
+	color:aqua
 }
 
 #profile_pic{
@@ -33,4 +34,9 @@ p, span, small{
 hr{
 	margin: 20px;
 	background-color: #eaeaea;
+}
+
+.control_is-expanded{
+	background-color: black;
+	color: white;
 }
