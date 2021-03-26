@@ -10,8 +10,6 @@ def index(request):
     url = 'https://www.balldontlie.io/api/v1/players/?search={}'
 
     error = ''
-    # message = ''
-    # message_class = ''
 
     if request.method == 'POST':
         form = PlayerForm(request.POST)
@@ -31,14 +29,6 @@ def index(request):
                 error = 'Player is already in the database'
         return HttpResponseRedirect('/')
     
-    '''
-        if error:
-            message = error
-            message_class = 'is-danger'
-        else:
-            message = 'Player added successfully'
-            message_class = 'is-success'
-    '''
 
     form = PlayerForm()
 
@@ -48,7 +38,6 @@ def index(request):
 
     for player in players:
         r = requests.get(url.format(player)).json()
-        # print(r.text)
         
         nba_players = {
             'name': player.name,
@@ -62,8 +51,6 @@ def index(request):
     context = {
         'player_data': player_data, 
         'form': form,
-        # 'message' : message,
-        # 'message_class' : message_class
     }
     
     return render(
